@@ -24,16 +24,14 @@ import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import signUpAction from "@/app/authenticate/auth-action";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 export default function Signup() {
-  const router = useRouter();
   const formSchema = z
     .object({
       name: z.string().min(1, "Name is required"),
       email: z.string().email().min(1, "Email is required"),
       password: z.string().min(1, "Password is required"),
-      confirmPassword: z.string().min(1, "Description is required"),
+      confirmPassword: z.string().min(1, "Confirm Password is required"),
     })
     .refine((data) => data.password === data.confirmPassword, {
       path: ["confirmPassword"],
@@ -56,7 +54,7 @@ export default function Signup() {
     const res = await signUpAction(user);
     if (res.success) {
       toast.success("Account created successfully");
-      router.push("/");
+      form.reset();
     } else {
       toast.error(res.error);
     }
@@ -116,7 +114,11 @@ export default function Signup() {
                 <FormItem>
                   <FormLabel className="text-zinc-900">Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter password" {...field} />
+                    <Input
+                      placeholder="Enter password"
+                      type="password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -131,7 +133,11 @@ export default function Signup() {
                     Confirm Password
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter confirm password" {...field} />
+                    <Input
+                      placeholder="Enter confirm password"
+                      type="password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

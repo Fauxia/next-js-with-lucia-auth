@@ -1,15 +1,15 @@
-import CreatePost from "@/components/CreatePost";
+import { getUser } from "@/app/lib/lucia";
 import { redirect } from "next/navigation";
-import { getUser } from "../lib/lucia";
 
 export default async function page() {
   const user = await getUser();
-  if (!user.user) {
+  if (!user) {
     return redirect("/authenticate");
   }
   return (
     <div>
-      <CreatePost />
+      <h1>{user?.user?.name}</h1>
+      <p>{user?.user?.email}</p>
     </div>
   );
 }

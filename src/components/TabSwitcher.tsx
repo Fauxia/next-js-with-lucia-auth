@@ -8,7 +8,7 @@ type Props = {
 
 export default function TabSwitcher(props: Props) {
   return (
-    <div className="grid justify-center mt-7 w-full px-3">
+    <div>
       <Tabs defaultValue="sign-in" className="max-w-[400px] w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="sign-up">Sign Up</TabsTrigger>

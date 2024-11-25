@@ -2,17 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
-import { CircleUserRound } from "lucide-react";
+import { logoutUser } from "@/app/authenticate/auth-action";
+import { useSession } from "@/providers/SessionProvider";
+import { toast } from "sonner";
 
 export default function Header() {
+  const { user } = useSession();
   const pathName = usePathname();
+  const router = useRouter();
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/posts", label: "Posts" },
     { href: "/create-post", label: "Create Post" },
   ];
+
+  const logOut = async () => {
+    const res = await logoutUser();
+    if (res.success) {
+      return router.push("/authenticate");
+    } else {
+      toast.error(res.error);
+    }
+  };
 
   return (
     <header className="flex justify-between px-7 py-5 border-b items-center">
@@ -36,6 +49,15 @@ export default function Header() {
               <Link href={link.href}>{link.label}</Link>
             </li>
           ))}
+          {user ? (
+            <form action={logOut}>
+              <Button type="submit">Log out</Button>
+            </form>
+          ) : (
+            <Link href={"/authenticate"}>
+              <Button>Sign in</Button>
+            </Link>
+          )}
         </ul>
       </nav>
     </header>
