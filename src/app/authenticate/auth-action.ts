@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { sendEmail } from "../lib/email";
 
-type UserOmit = Omit<User, "id" | "emailVerified">;
+type UserOmit = Omit<User, "id" | "emailVerified" | "image">;
 
 export default async function signUpAction(user: UserOmit) {
   try {
