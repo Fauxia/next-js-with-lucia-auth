@@ -38,7 +38,7 @@ export default function CreatePost() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-[500px] w-full mx-auto"
+        className="max-w-[500px] w-full mx-auto px-3"
       >
         {/* Title Field */}
         <FormField
@@ -46,7 +46,9 @@ export default function CreatePost() {
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-zinc-900">Title</FormLabel>
+              <FormLabel className="text-zinc-900 text-lg font-medium">
+                Title
+              </FormLabel>
               <FormControl>
                 <Input
                   placeholder="Enter title"
@@ -65,7 +67,9 @@ export default function CreatePost() {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-zinc-900">Description</FormLabel>
+              <FormLabel className="text-zinc-900 text-lg font-medium">
+                Description
+              </FormLabel>
               <FormControl>
                 <Input placeholder="Enter description" {...field} />
               </FormControl>
@@ -75,7 +79,9 @@ export default function CreatePost() {
         />
 
         {/* Submit Button */}
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="mt-3 w-full">
+          Submit
+        </Button>
       </form>
     </Form>
   );

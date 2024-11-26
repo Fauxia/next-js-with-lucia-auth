@@ -37,7 +37,7 @@ export default function Header() {
           height={35}
         />
       </Link>
-      <nav>
+      <nav className="flex flex-col md:flex-row">
         <ul className="flex gap-3 items-center">
           {navLinks.map((link) => (
             <li
@@ -49,16 +49,16 @@ export default function Header() {
               <Link href={link.href}>{link.label}</Link>
             </li>
           ))}
-          {user ? (
-            <form action={logOut}>
-              <Button type="submit">Log out</Button>
-            </form>
-          ) : (
-            <Link href={"/authenticate"}>
-              <Button>Sign in</Button>
-            </Link>
-          )}
         </ul>
+        {user ? (
+          <form action={logOut}>
+            <Button type="submit">Log out</Button>
+          </form>
+        ) : (
+          <Link href={"/authenticate"}>
+            <Button>Sign in</Button>
+          </Link>
+        )}
       </nav>
     </header>
   );

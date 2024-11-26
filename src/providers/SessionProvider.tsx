@@ -3,8 +3,14 @@
 import { Session, User } from "lucia";
 import React, { createContext, useContext } from "react";
 
+interface CustomUser {
+  name: string;
+  email: string;
+  id?: string; // Make id optional if not always available
+}
+
 interface SessionProviderProps {
-  user: User | null;
+  user: CustomUser | null;
   session: Session | null;
 }
 
