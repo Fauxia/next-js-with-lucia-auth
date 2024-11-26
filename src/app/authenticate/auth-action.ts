@@ -8,9 +8,13 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { sendEmail } from "../lib/email";
 
-type UserOmit = Omit<User, "id" | "emailVerified" | "image">;
+interface User {
+  name: string;
+  email: string;
+  password: string;
+}
 
-export default async function signUpAction(user: UserOmit) {
+export default async function signUpAction(user: User) {
   try {
     const existingUser = await prisma.user.findUnique({
       where: {
@@ -26,7 +30,8 @@ export default async function signUpAction(user: UserOmit) {
       : null;
     const newUser = await prisma.user.create({
       data: {
-        ...user,
+        name: user.name,
+        email: user.email,
         password: hashedPassword,
       },
     });
