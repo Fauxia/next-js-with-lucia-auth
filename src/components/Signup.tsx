@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import signUpAction from "@/app/authenticate/auth-action";
 import { toast } from "sonner";
+import { LoaderCircle } from "lucide-react";
 
 export default function Signup() {
   const formSchema = z
@@ -145,7 +146,16 @@ export default function Signup() {
             />
 
             {/* Submit Button */}
-            <Button type="submit">Submit</Button>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={form.formState.isSubmitting}
+            >
+              Submit
+              {form.formState.isSubmitting && (
+                <LoaderCircle className="animate-spin" />
+              )}
+            </Button>
           </form>
         </Form>
       </CardContent>
