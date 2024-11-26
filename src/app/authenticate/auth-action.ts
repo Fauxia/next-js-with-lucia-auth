@@ -2,7 +2,6 @@
 
 import { getUser, lucia } from "@/app/lib/lucia";
 import { prisma } from "@/app/lib/prisma";
-import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
